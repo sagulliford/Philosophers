@@ -33,7 +33,7 @@ public class Philosopher extends Thread {
 		p[1] = new Philosopher("P: 1 - ", c[1], c[2]);
 		p[2] = new Philosopher("P: 2 - ", c[2], c[3]);
 		p[3] = new Philosopher("P: 3 - ", c[3], c[4]);
-		p[4] = new Philosopher("P: 4 - ", c[0], c[4]);
+		p[4] = new Philosopher("P: 4 - ", c[4], c[0]);
 
 		// For loop creating the 5 philosopher threads
 		for (int i = 0; i < p.length; i++) {
