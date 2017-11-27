@@ -10,6 +10,7 @@ public class Philosopher extends Thread {
 	// Assigning variables to be used later
 	int state;
 	Thread t;
+	boolean running;
 	boolean beingUsed;
 	String _name;
 	Chopsticks[] c;
@@ -37,7 +38,7 @@ public class Philosopher extends Thread {
 		// For loop creating the 5 philosopher threads
 		for (int i = 0; i < p.length; i++) {
 			Thread t = new Thread(p[i]);
-			System.out.println("Thred " + i);
+			System.out.println("Starting Philosopher " + i);
 			t.start();
 		}
 	}
@@ -55,7 +56,12 @@ public class Philosopher extends Thread {
 		// method idea gotten from Nate who told us to check to
 		// see if the left is available, then the right. If so
 		// pick them both up.
-
+		try {
+			Thread.sleep((long) (Math.random() * 1000));
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch bloc
+			e.printStackTrace();
+		}
 		// Checking to see if left chopstick is available
 		if (!leftC.getAvail()) {
 			// Checking to see if right chopstick is avialable
@@ -64,11 +70,11 @@ public class Philosopher extends Thread {
 				// chopsticks up
 				leftC.take();
 				rightC.take();
-
-				System.out.println(_name + " : Eat");
+				long temp = 5 + (long) (Math.random() * 5000);
+				System.out.println(_name + " : Eat for " + temp);
 				// Philosopher is eating for a certain amount of time
 				try {
-					Thread.sleep((long) (Math.random() * 5000));
+					Thread.sleep(temp);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch bloc
 					e.printStackTrace();
@@ -85,13 +91,15 @@ public class Philosopher extends Thread {
 
 	public void philosophize() { // kinda throwaway method so time will elapse
 		this.state = 1; // this.state borrowed from GitHub, source cited above
-		System.out.println(_name + " : Think");
+		long temp = 5 + (long) (Math.random() * 5000);
+		System.out.println(_name + " : Philosophize for " + temp);
 		try {
-			Thread.sleep((long) (Math.random() * 5000));
+			Thread.sleep(temp);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		eat();
 	}
 
 	public void run() {
@@ -102,9 +110,7 @@ public class Philosopher extends Thread {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		for (int i = 0; i <= 5; i++) {
-			eat();
-		}
+		eat();
 	}
 
 }
