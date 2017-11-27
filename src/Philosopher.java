@@ -103,13 +103,6 @@ public class Philosopher extends Thread {
 	}
 
 	public void run() {
-		try {
-			Thread.sleep(3000);
-			// so all the threads can start at the same time
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		eat();
 	}
 
